@@ -533,7 +533,7 @@ int main()
 		settextstyle(10, 0, 4);
 		outtextxy(180, 240, "Your Score:");
 		outtextxy(455,240,Score);
-		PlaySound(TEXT("win.wav"),NULL,SND_SYNC); //YOU WIN SOUND -----------------------------------------
+		PlaySound(TEXT("win.wav"),NULL,SND_SYNC);
 	}
 	else
 	{
@@ -542,7 +542,7 @@ int main()
 		settextstyle(10, 0, 4);
 		outtextxy(170, 260, "Your Score:");
 		outtextxy(380,260,Score);
-		PlaySound(TEXT("lose.wav"),NULL,SND_SYNC); //YOU LOSE SOUND -----------------------------------------
+		PlaySound(TEXT("lose.wav"),NULL,SND_SYNC);
 	}
 	
 	//Ending waiting time
