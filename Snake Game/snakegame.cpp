@@ -1,19 +1,15 @@
 #include <iostream>
-#include <windows.h> //colours
-#include <graphics.h> //graphics
-#include <time.h> //randoms
-#include <mmsystem.h> //SOUND
+#include <windows.h>
+#include <graphics.h>
+#include <time.h>
+#include <mmsystem.h>
 
 using namespace std;
 
 int main()
 {
-	
-	//Creating canvas
-	initwindow(640, 480);
+    initwindow(640, 480);
     setfillstyle(1,1);
-    
-    //Introduction screen
     for(int i = 0; i < 200; i++)
     {
     	setcolor(10);
@@ -47,10 +43,8 @@ int main()
 	int difficulty;
 	int display = 1;
 	
-	srand(time(0)); //random number generating syntax
+	srand(time(0));
     
-    
-    //Starting screen
     while(start != 1)
     {    
 		if(display == 1)
@@ -76,7 +70,6 @@ int main()
     		display = 0;	
 		}
 		
-    	//Starting screen Arrows
     	if(choice == 1)
     	{
     		line(200, 200, 220, 220);
@@ -96,7 +89,6 @@ int main()
     		line(215, 400, 215, 440);
 		}
     	
-    	//Starting screen Keys
     	if(GetAsyncKeyState(VK_UP))
 		{
 			if(choice == 2)
@@ -131,7 +123,6 @@ int main()
 			}
 			else if(choice == 2) 
 			{
-				//How to play screen
 				delay(100);
 				setfillstyle(1,0);
     			bar(0,0,640,480);
@@ -172,7 +163,6 @@ int main()
     	delay(100);
 	}
 	
-	//Difficulty Screen
 	display = 1;
 	while(start != 2)
 	{
@@ -198,7 +188,6 @@ int main()
 		}
 		
     	
-    	//Difficulty screen arrows
     	if(choice == 1)
     	{
     		line(200, 200, 220, 220);
@@ -218,7 +207,6 @@ int main()
     		line(200, 380, 200, 420);
 		}
     	
-    	//Difficulty screen keys
     	if(GetAsyncKeyState(VK_UP))
 		{
 			if(choice == 2)
@@ -253,46 +241,38 @@ int main()
 	}
     delay(500);
     
-    //Setting all array values to -20
 	for(int i = 0;i < 30 ; i++)
 	{
         x[i] = -20;
         y[i] = -20;
     }
     
-    //Settting snake head position at start
     x[0] = 100;
     y[0] = 100;
 
 
-	//Edge bars
     setfillstyle(1,9);
     bar(0,0,640,60);
     bar(0,0,10,480);
     bar(0,480,640,470);
     bar(630,10,640,480);
     
-    //Background bar
     setfillstyle(1,15);
 	bar(10,60,630,470);
 	
-	//Score text
 	setcolor(15);
 	settextstyle(10, 0, 2);
 	setbkcolor(9);
 	outtextxy(10, 35, "Score: ");
 	
-	//Snake game title during game
 	settextstyle(10, 0, 3);
 	outtextxy(240, 10, "Snake Game");
 	
-	//Setting score to zero
 	score = 0;
 	Score[0] = '0';
 	Score[1] = '0';
 	Score[2] = '\0';
 		
-	//Obstacles
 	if(difficulty >= 2)
     {
 		setfillstyle(1,9);
@@ -309,25 +289,15 @@ int main()
 	
     while(start != 0)
     {
-    	
-    	
-		
-		
-		
-    	//Score
     	setcolor(15);
 		settextstyle(10, 0, 2);
 		setbkcolor(9);
 		outtextxy(90, 35, Score);
-	
-		//Game win
     	if(score >= 20)
 		{
     		start = 0;
     		break;
     	}
-    	
-    	//Eating food
     	if(x[0]==Foodx && y[0]==Foody)
     	{
     		length += 1;
@@ -336,11 +306,7 @@ int main()
 			Score[0] = char(48 + score / 10);
 			Score[1] = char(48 + score % 10);
 			Score[2] = '\0';
-		
-			// EATING SOUND---------------------------------------
     		PlaySound(TEXT("eat.wav"),NULL,0); 
-    		
-    		//Setting food location
     		Foodx = (rand() % 560) + 60;
     		while(Foodx % 20 != 0)
     		{
@@ -356,16 +322,12 @@ int main()
     		
 		}
     	
-    	//Food
-    	
-    	
     	setfillstyle(1,12);
     	setcolor(fc);
     	circle(Foodx + 10, Foody + 10, 10);
     	setfillstyle(SOLID_FILL, fc);
     	floodfill(Foodx+10,Foody+10,fc);
     	
-    	//Snake direction
     	if(GetAsyncKeyState(VK_RIGHT)){d=1;}
     	else if(GetAsyncKeyState(VK_LEFT)){ d=2;}
     	else if(GetAsyncKeyState(VK_UP)){ d=3;}
@@ -399,7 +361,6 @@ int main()
 	        	break;
 	    }
     	
-    	//Snake head
     	for(int i = 0; i < length; i++)
 		{
 			if(i == 0)
@@ -414,7 +375,6 @@ int main()
 			}
         	bar(x[i], y[i], x[i]+20, y[i]+20);
         	
-        	//lose by touching body
         	if(i > 0)
         	{
         		if(x[i] == x[0] && y[i] == y[0])
@@ -429,14 +389,12 @@ int main()
 			if(GetAsyncKeyState(VK_RETURN))
 			break;
 		}
-    	//Snake body
-    	for(int i= length; i > 0; i--) // movement of coordinates of snake body
+    	for(int i= length; i > 0; i--) 
 		{
     		x[i] = x[i-1];
     	    y[i] = y[i-1];
     	}
     	
-    	//Filling snake past spaces
     	int j = 0;
     	while(x[j] != -20)
     	{
@@ -453,14 +411,12 @@ int main()
 		setfillstyle(1,15);
 		bar(x[j], y[k], x[j]+20, y[k]+20);
 		
-    	//lose by touching edge
     	if(x[0] >= 620 || x[0]<=0|| y[0]<=60 || y[0]>=460)
 		{
     		start = 0;
     		break;
     	}
     	
-    	//Difficulty 2 Obstacles
     	if(difficulty >= 2)
     	{
     		if(x[0] >= 200 && x[0]<440 && y[0]<300 && y[0]>=200)
@@ -475,7 +431,6 @@ int main()
    			}
 		}
 		
-		//Difficulty 3 Obstacles
 		if(difficulty >= 3)
     	{
     		if(x[0] >= 60 && x[0]<100 && y[0]<400 && y[0]>=120)
@@ -501,11 +456,9 @@ int main()
    			}
 		}
     	
-    	//Snake speed
     	delay(150);
 	}
 	
-	//Pause after game over
 	setfillstyle(1,9);
 	if(difficulty >= 2)
 	{
@@ -518,14 +471,12 @@ int main()
 	}
 	delay(1000);
 	
-	//Ending Screen
 	setfillstyle(1,0);
     bar(0,0,640,480);
     setcolor(15);
 	settextstyle(10, 0, 7);
 	setbkcolor(0);
 	
-	//Ending text
 	if(score >= 20)
 	{
 		settextstyle(10, 0, 5);
@@ -545,7 +496,6 @@ int main()
 		PlaySound(TEXT("lose.wav"),NULL,SND_SYNC);
 	}
 	
-	//Ending waiting time
 	delay(3000);
 }
     getch();
